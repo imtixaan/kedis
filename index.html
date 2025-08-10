@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>✅ IMTIXAANO F8 </title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <div class="logo-container">
+                <img src="https://res.cloudinary.com/dsnlshm9k/image/upload/v1734294137/LOGO_LAST_SAX_2024-2025_rkln16.png" alt="ImtixaanoF8" class="logo">
+            </div>
+            <h1>🧭 IMTIXAANO F8 </h1>
+        </div>
+
+        <div class="quiz-body">
+            <div id="loading-initial" class="loading">
+                <div class="loading-spinner"></div>
+                <span>Ku sugnaaw...</span>
+            </div>
+
+            <div id="login-section" class="hide">
+                <div class="login-card">
+                    <h2>LOGIN</h2>
+                    <p><b>USER NAME: </b>Imtixaan</p>
+                    <p><b>PASSWORD: </b>123</p>
+                      <form id="login-form">
+                        <div class="input-group">
+                            <input type="text" id="username-input" placeholder="Magacaaga" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="password-input" placeholder="Eraygaaga Sirta ah" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">GUDUB</button>
+                        <p id="login-error" class="error-message"></p>
+                    </form>
+                </div>
+            </div>
+
+            <div id="sheet-selection-section" class="hide">
+                <div class="sheet-selection-card">
+                    <h2>XULO MAADO</h2>
+                    <p>Fadlan dooro maadadda aad dooneyso inaad imtixaan ka gasho.</p>
+                    <form id="sheet-selection-form">
+                        <select id="sheet-dropdown" required></select>
+                        <button type="submit" class="btn btn-primary">BILAAB IMTIXAANKA</button>
+                        <p id="sheet-error" class="error-message"></p>
+                    </form>
+                </div>
+            </div>
+
+            <div id="quiz-playing-section" class="hide">
+                <div class="quiz-info-header">
+                    <div class="user-info-container">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="welcome-message"></span>
+                    </div>
+                    <div class="progress-timer-container">
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                            <span id="progress-text">0 / 0</span>
+                        </div>
+                        <div class="timer-container">
+                            <i class="fas fa-hourglass-half timer-icon"></i>
+                            <span id="timer-text">60s</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <p id="question-text"></p>
+                    <div class="options-grid" id="options-container"></div>
+                    <div class="rationale-container hide" id="rationale-container">
+                        <p><strong>Falanqeyn:</strong> <span id="rationale-text"></span></p>
+                    </div>
+                    <button class="btn btn-primary hide" id="next-btn" style="margin-top: 2rem; width: 100%;">Su'aasha Xigta</button>
+                </div>
+            </div>
+
+            <div id="results-section" class="hide">
+                <div class="results-overview">
+                    <h2 style="text-align: center; margin-bottom: var(--space-xl); color: var(--gray-800); font-size: clamp(1.5rem, 5vw, 2rem);">
+                        🎉 NATIIJADA GUUD 
+                    </h2>
+                    
+                    <div class="results-stats">
+                        <div class="stat-card">
+                            <div class="stat-number correct" id="correct-count">0</div>
+                            <div class="stat-label">Su'aalaha Saxda ah</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number wrong" id="wrong-count">0</div>
+                            <div class="stat-label">Su'aalaha Qaldan</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number percentage" id="percentage-score">0%</div>
+                            <div class="stat-label">Boqolleyda Guud</div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="results-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="question-review">
+                    <div class="review-header">
+                        <h3 class="review-title">DIB U EEGIS SU'AALAHA</h3>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">Dhammaan</button>
+                            <button class="filter-btn" data-filter="correct">Saxda ah</button>
+                            <button class="filter-btn" data-filter="wrong">Qaldan</button>
+                        </div>
+                    </div>
+                    
+                    <div id="questions-review-container">
+                        </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="generate-pdf-btn">
+                        <i class="fas fa-file-pdf"></i>
+                        <span class="btn-text">Diyaari Warbixinta (PDF)</span>
+                        <div class="loading-spinner hide" style="width: 20px; height: 20px; border-width: 2px; border-color: white; border-top-color: var(--primary-green-dark);"></div>
+                    </button>
+                    <button class="btn btn-secondary" id="restart-quiz-btn">
+                        <i class="fas fa-redo"></i>
+                        Dooro Maado Kale
+                    </button>
+                </div>
+                <div id="pdf-download-link-container" style="margin-top: 1rem; text-align: center;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
